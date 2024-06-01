@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b8c6608bf96c0489530de098e19d5c, type: 3}
-  m_Name: Metal
+  m_Name: Gold
   m_EditorClassIdentifier: 
   Prefab: {fileID: 8240957256131430188, guid: 608934d42bb6c0c468647fff9b265874, type: 3}
-  UIColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
+  UIColor: {r: 0.8207547, g: 0.7949516, b: 0.2748754, a: 1}

@@ -1,10 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class GM
 {
+    public class ResourceData
+    {
+        public ResourceSO ResourceSO;
+        public int Amount;
+    }
     private static Dictionary<ResourceSO, int> _resourceAmountDictionary;
 
+    public static event EventHandler<ResourceData> ResourceAmountChanged;
+    
     static GM()
     {
         _resourceAmountDictionary = new Dictionary<ResourceSO, int>();
@@ -15,7 +23,7 @@ public static class GM
         _resourceAmountDictionary.TryAdd(resourceSo, 0);
         
         _resourceAmountDictionary[resourceSo]++;
-        Debug.Log($"Name: {resourceSo.name} | Amount: {_resourceAmountDictionary[resourceSo]}");
+        ResourceAmountChanged?.Invoke(null, new ResourceData(){ResourceSO = resourceSo, Amount = _resourceAmountDictionary[resourceSo]});
     }
 
     public static bool TrySpendResource(ResourceSO resourceSo)
@@ -27,6 +35,7 @@ public static class GM
             return false;
 
         _resourceAmountDictionary[resourceSo]--;
+        ResourceAmountChanged?.Invoke(null, new ResourceData(){ResourceSO = resourceSo, Amount = _resourceAmountDictionary[resourceSo]});
         return true;
     }
 }
