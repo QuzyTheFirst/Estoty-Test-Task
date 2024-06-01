@@ -9,7 +9,7 @@ public static class GM
         public ResourceSO ResourceSO;
         public int Amount;
     }
-    private static Dictionary<ResourceSO, int> _resourceAmountDictionary;
+    private static readonly Dictionary<ResourceSO, int> _resourceAmountDictionary;
 
     public static event EventHandler<ResourceData> ResourceAmountChanged;
     

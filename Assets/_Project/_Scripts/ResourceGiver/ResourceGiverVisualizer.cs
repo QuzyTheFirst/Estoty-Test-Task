@@ -7,21 +7,14 @@ using Random = UnityEngine.Random;
 public class ResourceGiverVisualizer : MonoBehaviour
 {
     [Header("Drop Animation")]
-    [SerializeField] private float _dropUpPower = 3;
+    [SerializeField] private float _dropUpPower = 6;
     [SerializeField] private float _dropSidePower = 3;
-    [SerializeField] private float _dropMinRotationPower = 2;
-    [SerializeField] private float _dropMaxRotationPower = 5;
+    [SerializeField] private float _dropMinRotationPower = 4;
+    [SerializeField] private float _dropMaxRotationPower = 7;
 
     [Header("Going To Player Animation")]
     [SerializeField] private float _timeBeforeGoingToPlayer = .5f;
     [SerializeField] private float _timeTravelingToPlayer = .2f;
-
-    private ResourceGiver _resourceGiver;
-    
-    private void Awake()
-    {
-        _resourceGiver = GetComponent<ResourceGiver>();
-    }
 
     public void DropResource(ResourceSO resourceSo, Transform target)
     {
@@ -32,7 +25,7 @@ public class ResourceGiverVisualizer : MonoBehaviour
         StartCoroutine(GoToTarget(rig, target));
     }
     
-    IEnumerator GoToTarget(Rigidbody rig, Transform player)
+    IEnumerator GoToTarget(Rigidbody rig, Transform target)
     {
         yield return new WaitForSeconds(_timeBeforeGoingToPlayer);
         rig.velocity *= 0.5f;
@@ -43,7 +36,7 @@ public class ResourceGiverVisualizer : MonoBehaviour
         while (timer < _timeTravelingToPlayer)
         {
             timer += Time.deltaTime;
-            Vector3 currentPosition = Vector3.Lerp(startPosition, player.position, timer / _timeTravelingToPlayer);
+            Vector3 currentPosition = Vector3.Lerp(startPosition, target.position, timer / _timeTravelingToPlayer);
             rig.transform.position = currentPosition;
             yield return null;
         }

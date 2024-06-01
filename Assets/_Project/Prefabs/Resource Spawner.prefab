@@ -188,7 +188,7 @@ MonoBehaviour:
   _playerMask:
     serializedVersion: 2
     m_Bits: 64
-  _intervalBetweenDrop: 0.05
+  _intervalBetweenDrop: 0.02
 --- !u!114 &4251296737950027893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
