@@ -19,6 +19,8 @@ public class ColorfulSphereCube : MonoBehaviour
 
     private List<CubePart> _cubeParts;
     
+    private readonly int _colorPropertyId = Shader.PropertyToID("_Color");
+
     private void Awake()
     {
         _cubeParts = new List<CubePart>();
@@ -48,7 +50,10 @@ public class ColorfulSphereCube : MonoBehaviour
         {
             float lerpValue = Mathf.InverseLerp(-1, 1, (float)Math.Cos((cubePart.Tf.position.x + Time.time * _animationSpeed) / _cosCurveDivider));
             Color color = Color.Lerp(_firstColor, _secondColor, lerpValue);
-            cubePart.Renderer.material.color = color;
+            
+            MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+            propertyBlock.SetColor(_colorPropertyId, color);
+            cubePart.Renderer.SetPropertyBlock(propertyBlock);
         }
     }
 }
