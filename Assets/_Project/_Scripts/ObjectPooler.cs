@@ -8,22 +8,14 @@ public class ObjectPooler : MonoBehaviour
     [System.Serializable]
     public class Pool
     {
-        public ResourceType resourceType;
-        public GameObject prefab;
-        public int size;
-    }
-    
-    public enum ResourceType
-    {
-        Wood,
-        Rock,
-        Metal
+        public ResourceSO Resource;
+        public int Size;
     }
 
     public static ObjectPooler Instance;
 
     [SerializeField] private List<Pool> _pools;
-    private Dictionary<ResourceType, Queue<GameObject>> _poolDictionary;
+    private Dictionary<ResourceSO, Queue<GameObject>> _poolDictionary;
 
     private void Awake()
     {
@@ -32,38 +24,38 @@ public class ObjectPooler : MonoBehaviour
 
     private void Start()
     {
-        _poolDictionary = new Dictionary<ResourceType, Queue<GameObject>>();
+        _poolDictionary = new Dictionary<ResourceSO, Queue<GameObject>>();
 
         foreach (Pool pool in _pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for (int i = 0; i < pool.size; i++)
+            for (int i = 0; i < pool.Size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.Resource.Prefab);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
 
-            _poolDictionary.Add(pool.resourceType, objectPool);
+            _poolDictionary.Add(pool.Resource, objectPool);
         }
     }
 
-    public GameObject SpawnFromPool(ResourceType resourceType, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(ResourceSO resourceSO, Vector3 position, Quaternion rotation)
     {
-        if (!_poolDictionary.ContainsKey(resourceType))
+        if (!_poolDictionary.ContainsKey(resourceSO))
         {
             Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
             return null;
         }
 
-        GameObject objectToSpawn = _poolDictionary[resourceType].Dequeue();
+        GameObject objectToSpawn = _poolDictionary[resourceSO].Dequeue();
 
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
         
-        _poolDictionary[resourceType].Enqueue(objectToSpawn);
+        _poolDictionary[resourceSO].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }

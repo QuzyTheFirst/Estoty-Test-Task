@@ -187,12 +187,11 @@ MonoBehaviour:
   _playerMask:
     serializedVersion: 2
     m_Bits: 64
-  _intervalBetweenDrop: 0.1
+  _intervalBetweenDrop: 0.05
   _dropUpPower: 6
   _dropSidePower: 3
   _dropMinRotationPower: 4
   _dropMaxRotationPower: 7
-  _sinCosCurveMultiplier: 16
   _timeBeforeGoingToPlayer: 0.5
   _timeTravelingToPlayer: 0.2
 --- !u!54 &4492764514909838275

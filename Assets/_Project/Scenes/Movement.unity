@@ -1039,12 +1039,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
+      propertyPath: _resourceSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 1aef69ff9d9031040ac207261b2cf487, type: 2}
+    - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: _resourceType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8451066050516121588, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: m_Name
-      value: Wood Spawner (1)
+      value: Wood Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1297,12 +1301,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
+      propertyPath: _resourceSO
+      value: 
+      objectReference: {fileID: 11400000, guid: d25987a4739ce3c449bf8b9752b4edb4, type: 2}
+    - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: _resourceType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8451066050516121588, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: m_Name
-      value: Wood Spawner (2)
+      value: Metal Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1836,15 +1844,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
-  - resourceType: 0
-    prefab: {fileID: 2440758106813900024, guid: 04b0ae7d09f44f641a5f391b1700cf34, type: 3}
-    size: 100
-  - resourceType: 1
-    prefab: {fileID: 2210974876075335470, guid: d550ac80289b19a4a95349dcbd62aafa, type: 3}
-    size: 100
-  - resourceType: 2
-    prefab: {fileID: 8240957256131430188, guid: 608934d42bb6c0c468647fff9b265874, type: 3}
-    size: 100
+  - Resource: {fileID: 11400000, guid: d25987a4739ce3c449bf8b9752b4edb4, type: 2}
+    Size: 100
+  - Resource: {fileID: 11400000, guid: 239a9d9a11d9fa14698740181afece2c, type: 2}
+    Size: 100
+  - Resource: {fileID: 11400000, guid: 1aef69ff9d9031040ac207261b2cf487, type: 2}
+    Size: 100
 --- !u!4 &2130646854
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,12 +1914,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
+      propertyPath: _resourceSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 239a9d9a11d9fa14698740181afece2c, type: 2}
+    - target: {fileID: 5400915526370584947, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: _resourceType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8451066050516121588, guid: a527f3f7524168c4f99c5abe268af0b3, type: 3}
       propertyPath: m_Name
-      value: Wood Spawner
+      value: Rock Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ResourceGiver : MonoBehaviour
 {
-    [SerializeField] private ObjectPooler.ResourceType _resourceType;
+    [SerializeField] private ResourceSO _resourceSO;
     [SerializeField] private LayerMask _playerMask;
     
     [Header("Drop")]
@@ -14,7 +15,6 @@ public class ResourceGiver : MonoBehaviour
     [SerializeField] private float _dropSidePower = 3;
     [SerializeField] private float _dropMinRotationPower = 2;
     [SerializeField] private float _dropMaxRotationPower = 5;
-    [SerializeField] private float _sinCosCurveMultiplier = 8;
 
     [Header("Going To Player")]
     [SerializeField] private float _timeBeforeGoingToPlayer = .5f;
@@ -34,9 +34,9 @@ public class ResourceGiver : MonoBehaviour
     {
         while (true)
         {
-            GameObject resource = ObjectPooler.Instance.SpawnFromPool(_resourceType, transform.position, Quaternion.identity);
+            GameObject resource = ObjectPooler.Instance.SpawnFromPool(_resourceSO, transform.position, Quaternion.identity);
             Rigidbody rig = resource.GetComponent<Rigidbody>();
-            rig.velocity = Vector3.up * _dropUpPower + (Vector3.right * Mathf.Cos(Time.time * _sinCosCurveMultiplier) + Vector3.forward * (float)Math.Sin(Time.time * _sinCosCurveMultiplier)) * _dropSidePower;
+            rig.velocity = Vector3.up * _dropUpPower + (Vector3.right * Random.Range(-1f, 1f) + Vector3.forward * Random.Range(-1f, 1f)) * _dropSidePower;
             rig.angularVelocity = Vector3.one * Random.Range(_dropMinRotationPower, _dropMaxRotationPower);
             StartCoroutine(GoToPlayer(rig, player));
             yield return new WaitForSeconds(_intervalBetweenDrop);
@@ -47,7 +47,7 @@ public class ResourceGiver : MonoBehaviour
     {
         yield return new WaitForSeconds(_timeBeforeGoingToPlayer);
         rig.velocity = rig.velocity * 0.5f;
-
+        yield return new WaitForSeconds(.2f);
         float timer = 0;
         Vector3 startPosition = rig.transform.position;
         while (timer < _timeTravelingToPlayer)
