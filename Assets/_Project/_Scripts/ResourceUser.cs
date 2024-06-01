@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class ResourceUser : MonoBehaviour
@@ -12,22 +13,29 @@ public class ResourceUser : MonoBehaviour
         public int Amount;
     }
 
+    public struct ResourceUsedEventData
+    {
+        public ResourceSO usedResourceSO;
+        public Transform playerTf;
+    }
+
+    public event EventHandler<ResourceUsedEventData> ResourceUsed;
+    public event EventHandler BuildCompleted; 
+
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private float _intervalBetweenUsing = .2f;
     [SerializeField] private BuildRequirement[] _reqList;
-    [SerializeField] private GameObject _openingContent;
 
     private Dictionary<ResourceSO, int> _resourcesAmountCollected;
 
     private Coroutine _playerInTriggerCoroutine;
 
-    private ResourceUserVisualizer _resourceUserVisualizer;
-    
+    public BuildRequirement[] BuildRequirements => _reqList;
+    public IReadOnlyDictionary<ResourceSO, int> ResourcesAmountCollected => _resourcesAmountCollected;
 
     private void Awake()
     {
         _resourcesAmountCollected = new Dictionary<ResourceSO, int>();
-        _resourceUserVisualizer = GetComponent<ResourceUserVisualizer>();
 
         foreach (BuildRequirement buildRequirement in _reqList)
         {
@@ -60,7 +68,11 @@ public class ResourceUser : MonoBehaviour
                     continue;
 
                 _resourcesAmountCollected[buildRequirement.ResourceSO]++;
-                _resourceUserVisualizer.UseResource(buildRequirement.ResourceSO, player, _openingContent.transform.position);
+                ResourceUsed?.Invoke(this, new ResourceUsedEventData()
+                {
+                    usedResourceSO = buildRequirement.ResourceSO, 
+                    playerTf = player
+                });
                 isResourceUsed = true;
 
                 yield return new WaitForSeconds(_intervalBetweenUsing);
@@ -71,9 +83,8 @@ public class ResourceUser : MonoBehaviour
 
             if (!readyToBeBuilt)
                 continue;
-
-            _openingContent.SetActive(true);
-            _resourceUserVisualizer.BuiltIsDone();
+            
+            BuildCompleted?.Invoke(this, EventArgs.Empty);
             enabled = false;
             yield break;
         }

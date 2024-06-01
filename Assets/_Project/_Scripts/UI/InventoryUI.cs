@@ -26,7 +26,6 @@ public class InventoryUI : MonoBehaviour
         if (_inventoryItems.Any(item => item.CurrentResourceSO == resourceData.ResourceSO))
         {
             InventoryUIItem uiItem = _inventoryItems.First(item => item.CurrentResourceSO == resourceData.ResourceSO);
-            uiItem.transform.SetSiblingIndex(0);
             uiItem.Set(resourceData);
         }
         else if (_inventoryItems.Any(item => item.CurrentResourceSO == null))

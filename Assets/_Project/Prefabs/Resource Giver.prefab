@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4251296737950027893}
   - component: {fileID: 4492764514909838275}
   m_Layer: 0
-  m_Name: Resource Spawner
+  m_Name: Resource Giver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
