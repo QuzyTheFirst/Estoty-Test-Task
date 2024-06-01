@@ -17,6 +17,7 @@ public class Milk : MonoBehaviour
     {
         if (( _playerMask & (1 << other.gameObject.layer)) != 0)
         {
+            transform.parent = null;
             _rig.useGravity = true;
 
             Vector3 dirFromPlayer = (transform.position - other.transform.position).normalized;

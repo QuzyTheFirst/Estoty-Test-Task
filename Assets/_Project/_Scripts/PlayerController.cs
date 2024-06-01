@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        _characterController.Move(move * (_speed * Time.deltaTime));
+        if (Physics.Raycast(transform.position + (move * 0.25f), Vector3.down, _groundMask))
+        {
+            _characterController.Move(move * (_speed * Time.deltaTime));
+        }
 
         // Jumping
         if (Input.GetButtonDown("Jump") && _isGrounded)
