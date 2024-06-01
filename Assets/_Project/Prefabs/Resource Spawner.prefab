@@ -146,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1936261913028675155}
   - component: {fileID: 5400915526370584947}
+  - component: {fileID: 4251296737950027893}
   - component: {fileID: 4492764514909838275}
   m_Layer: 0
   m_Name: Resource Spawner
@@ -183,11 +184,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe142cc6f27be9498064ed7db4948ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceType: 0
+  _resourceSO: {fileID: 0}
   _playerMask:
     serializedVersion: 2
     m_Bits: 64
   _intervalBetweenDrop: 0.05
+--- !u!114 &4251296737950027893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451066050516121588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2113e6033bcfb745ab1d8d597824d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _dropUpPower: 6
   _dropSidePower: 3
   _dropMinRotationPower: 4
