@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,9 +36,9 @@ public class ResourceUserUI : MonoBehaviour
     private void ResourceUserOnResourceUsed(object sender, ResourceUser.ResourceUsedEventData e)
     {
         ResourceUIRequirement resourceUIRequirement =
-            _uiRequirements.First(item => item.CurrentResourceSO == e.usedResourceSO);
+            _uiRequirements.First(item => item.CurrentResourceSO == e.ResourceSO);
         
-        resourceUIRequirement.UpdateCollectedAmount(_resourceUser.ResourcesAmountCollected[e.usedResourceSO]);
+        resourceUIRequirement.UpdateCollectedAmount(_resourceUser.ResourcesAmountCollected[e.ResourceSO]);
     }
 
     private void OnDisable()

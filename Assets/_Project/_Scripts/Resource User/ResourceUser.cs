@@ -15,8 +15,8 @@ public class ResourceUser : MonoBehaviour
 
     public struct ResourceUsedEventData
     {
-        public ResourceSO usedResourceSO;
-        public Transform playerTf;
+        public ResourceSO ResourceSO;
+        public Transform PlayerTf;
     }
 
     public event EventHandler<ResourceUsedEventData> ResourceUsed;
@@ -70,8 +70,8 @@ public class ResourceUser : MonoBehaviour
                 _resourcesAmountCollected[buildRequirement.ResourceSO]++;
                 ResourceUsed?.Invoke(this, new ResourceUsedEventData()
                 {
-                    usedResourceSO = buildRequirement.ResourceSO, 
-                    playerTf = player
+                    ResourceSO = buildRequirement.ResourceSO, 
+                    PlayerTf = player
                 });
                 isResourceUsed = true;
 

@@ -324,7 +324,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1539706954
 Transform:
@@ -353,12 +353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49eb2e36b3d43c947a2b96dea35683a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spherePf: {fileID: 4472925660533337138, guid: 7aceeba2a372abd4bb69da25ad74211a, type: 3}
   _cubeSize: 15
   _positionModifier: 1.5
   _firstColor: {r: 0.6510545, g: 0.1318975, b: 0.7169812, a: 1}
   _secondColor: {r: 0.21277858, g: 0.17443931, b: 0.754717, a: 1}
   _animationSpeed: 20
-  _cosCurveDivider: 5
+  _cosCurveLength: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

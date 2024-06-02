@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ColorfulSphereCube : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class ColorfulSphereCube : MonoBehaviour
         public Transform Tf;
         public MeshRenderer Renderer;
     }
-    
+
+    [SerializeField] private Transform _spherePf;
     [SerializeField] private int _cubeSize = 15;
-    [SerializeField] private float _positionModifier = 1.2f;
+    [SerializeField] private float _positionModifier = 1.5f;
     [SerializeField] private Color _firstColor;
     [SerializeField] private Color _secondColor;
-    [SerializeField] private float _animationSpeed = 10;
-    [SerializeField] private float _cosCurveDivider = 15;
+    [SerializeField] private float _animationSpeed = 20;
+    [SerializeField] private float _cosCurveLength = 5;
 
     private List<CubePart> _cubeParts;
     
@@ -31,12 +33,12 @@ public class ColorfulSphereCube : MonoBehaviour
             {
                 for(int z = 0; z < _cubeSize; z++)
                 {
-                    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    sphere.isStatic = true;
-                    sphere.transform.position = new Vector3(x, y, z) * _positionModifier;
+                    Transform sphere = Instantiate(_spherePf);
+                    sphere.gameObject.isStatic = true;
+                    sphere.position = new Vector3(x, y, z) * _positionModifier;
                     _cubeParts.Add(new CubePart()
                     {
-                        Tf = sphere.transform,
+                        Tf = sphere,
                         Renderer = sphere.GetComponent<MeshRenderer>(),
                     });
                 }
@@ -48,7 +50,7 @@ public class ColorfulSphereCube : MonoBehaviour
     {
         foreach (CubePart cubePart in _cubeParts)
         {
-            float lerpValue = Mathf.InverseLerp(-1, 1, (float)Math.Cos((cubePart.Tf.position.x + Time.time * _animationSpeed) / _cosCurveDivider));
+            float lerpValue = Mathf.InverseLerp(-1, 1, (float)Math.Cos((cubePart.Tf.position.x + Time.time * _animationSpeed) / _cosCurveLength));
             Color color = Color.Lerp(_firstColor, _secondColor, lerpValue);
             
             MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();

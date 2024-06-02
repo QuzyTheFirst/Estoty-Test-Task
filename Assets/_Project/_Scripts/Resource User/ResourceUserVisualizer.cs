@@ -103,7 +103,7 @@ public class ResourceUserVisualizer : MonoBehaviour
 
     private void ResourceUserOnResourceUsed(object sender, ResourceUser.ResourceUsedEventData resourceUsedEventData)
     {
-        UseResource(resourceUsedEventData.usedResourceSO, resourceUsedEventData.playerTf, _openingContent.transform.position);
+        UseResource(resourceUsedEventData.ResourceSO, resourceUsedEventData.PlayerTf, _openingContent.transform.position);
     }
     
     private void ResourceUserOnBuildCompleted(object sender, EventArgs e)

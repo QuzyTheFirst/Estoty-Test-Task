@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +13,13 @@ public class ResourceGiverVisualizer : MonoBehaviour
     [Header("Going To Player Animation")]
     [SerializeField] private float _timeBeforeGoingToPlayer = .5f;
     [SerializeField] private float _timeTravelingToPlayer = .2f;
+
+    private ResourceGiver _resourceGiver;
+
+    private void Awake()
+    {
+        _resourceGiver = GetComponent<ResourceGiver>();
+    }
 
     public void DropResource(ResourceSO resourceSo, Transform target)
     {
@@ -42,5 +47,19 @@ public class ResourceGiverVisualizer : MonoBehaviour
         }
         rig.gameObject.SetActive(false);
     }
-    
+
+    private void OnEnable()
+    {
+        _resourceGiver.ResourceGiven += ResourceGiverOnResourceGiven;
+    }
+
+    private void ResourceGiverOnResourceGiven(object sender, ResourceGiver.ResourceGivenEventData data)
+    {
+        DropResource(data.ResourceSO, data.PlayerTf);
+    }
+
+    private void OnDisable()
+    {
+        _resourceGiver.ResourceGiven -= ResourceGiverOnResourceGiven;
+    }
 }
