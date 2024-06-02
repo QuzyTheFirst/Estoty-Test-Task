@@ -23,11 +23,10 @@ public class ResourceGiverVisualizer : MonoBehaviour
 
     public void DropResource(ResourceSO resourceSo, Transform target)
     {
-        GameObject resource = ObjectPooler.Instance.SpawnFromPool(resourceSo, transform.position, Quaternion.identity);
-        Rigidbody rig = resource.GetComponent<Rigidbody>();
-        rig.velocity = Vector3.up * _dropUpPower + (Vector3.right * Random.Range(-1f, 1f) + Vector3.forward * Random.Range(-1f, 1f)) * _dropSidePower;
-        rig.angularVelocity = Vector3.one * Random.Range(_dropMinRotationPower, _dropMaxRotationPower);
-        StartCoroutine(GoToTarget(rig, target));
+        Resource resource = ResourcePooler.Instance.SpawnFromPool(resourceSo, transform.position, Quaternion.identity);
+        resource.Rig.velocity = Vector3.up * _dropUpPower + (Vector3.right * Random.Range(-1f, 1f) + Vector3.forward * Random.Range(-1f, 1f)) * _dropSidePower;
+        resource.Rig.angularVelocity = Vector3.one * Random.Range(_dropMinRotationPower, _dropMaxRotationPower);
+        StartCoroutine(GoToTarget(resource.Rig, target));
     }
     
     IEnumerator GoToTarget(Rigidbody rig, Transform target)

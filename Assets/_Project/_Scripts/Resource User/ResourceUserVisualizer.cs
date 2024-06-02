@@ -25,7 +25,7 @@ public class ResourceUserVisualizer : MonoBehaviour
 
     private ResourceUser _resourceUser;
 
-    private GameObject _lastUsedResource;
+    private Resource _lastUsedResource;
 
     private void Awake()
     {
@@ -34,13 +34,12 @@ public class ResourceUserVisualizer : MonoBehaviour
 
     private void UseResource(ResourceSO resourceSo, Transform player, Vector3 targetPos)
     {
-        _lastUsedResource = ObjectPooler.Instance.SpawnFromPool(resourceSo, player.position, Quaternion.identity);
-        Rigidbody rig = _lastUsedResource.GetComponent<Rigidbody>();
+        _lastUsedResource = ResourcePooler.Instance.SpawnFromPool(resourceSo, player.position, Quaternion.identity);
         Vector3 forward = (targetPos - player.position).normalized;
         Vector3 right = (Vector3.Cross(forward, Vector3.up)).normalized;
-        rig.velocity = Vector3.up * _dropUpPower + right * (Random.Range(-1f, 1f) * _dropSidePower) + forward * (Random.Range(0.5f, 1f) * _dropTowardPower);
-        rig.angularVelocity = Vector3.one * Random.Range(_dropMinRotationPower, _dropMaxRotationPower);
-        StartCoroutine(GoToTarget(rig, targetPos));
+        _lastUsedResource.Rig.velocity = Vector3.up * _dropUpPower + right * (Random.Range(-1f, 1f) * _dropSidePower) + forward * (Random.Range(0.5f, 1f) * _dropTowardPower);
+        _lastUsedResource.Rig.angularVelocity = Vector3.one * Random.Range(_dropMinRotationPower, _dropMaxRotationPower);
+        StartCoroutine(GoToTarget(_lastUsedResource.Rig, targetPos));
     }
     
     private IEnumerator GoToTarget(Rigidbody rig, Vector3 targetPos)
@@ -68,7 +67,7 @@ public class ResourceUserVisualizer : MonoBehaviour
 
     private void BuiltIsDone()
     {
-        if (_lastUsedResource == null || !_lastUsedResource.activeSelf)
+        if (_lastUsedResource == null || !_lastUsedResource.gameObject.activeSelf)
         {
             _visuals.SetActive(false);
             _openingContent.SetActive(true);
@@ -86,7 +85,7 @@ public class ResourceUserVisualizer : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (!_lastUsedResource.activeSelf)
+            if (!_lastUsedResource.gameObject.activeSelf)
             {
                 _openingContent.SetActive(true);
                 enabled = false;

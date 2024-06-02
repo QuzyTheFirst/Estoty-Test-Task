@@ -11,13 +11,18 @@ public class ColorfulSphereCube : MonoBehaviour
         public MeshRenderer Renderer;
     }
 
+    [Header("Mesh")]
     [SerializeField] private Transform _spherePf;
+    
+    [Header("Parameters")]
     [SerializeField] private int _cubeSize = 15;
     [SerializeField] private float _positionModifier = 1.5f;
-    [SerializeField] private Color _firstColor;
-    [SerializeField] private Color _secondColor;
     [SerializeField] private float _animationSpeed = 20;
     [SerializeField] private float _cosCurveLength = 5;
+    
+    [Header("Colors")]
+    [SerializeField] private Color _firstColor;
+    [SerializeField] private Color _secondColor;
 
     private List<CubePart> _cubeParts;
     

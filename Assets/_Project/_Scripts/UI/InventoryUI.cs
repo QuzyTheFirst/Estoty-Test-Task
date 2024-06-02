@@ -32,7 +32,6 @@ public class InventoryUI : MonoBehaviour
         {
             InventoryUIItem uiItem = _inventoryItems.First(item => item.CurrentResourceSO == null);
             uiItem.gameObject.SetActive(true);
-            uiItem.transform.SetSiblingIndex(0);
             uiItem.Set(resourceData);
         }
         else
